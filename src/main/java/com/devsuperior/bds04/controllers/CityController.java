@@ -17,7 +17,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devsuperior.bds04.dto.CityDTO;
 import com.devsuperior.bds04.exceptions.DatabaseException;
 import com.devsuperior.bds04.exceptions.ResourceNotFoundException;
-import com.devsuperior.bds04.repositories.CityRepository;
+
+import com.devsuperior.bds04.services.CityService;
 
 
 @RestController

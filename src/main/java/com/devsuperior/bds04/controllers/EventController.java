@@ -9,26 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.bds04.dto.EventDTO;
+import com.devsuperior.bds04.services.EventService;
 
 
 
 @RestController
 @RequestMapping(value = "/events")
 public class EventController {
- 
-	
 		
 			@Autowired
 			private EventService service;
-			
 			
 			@PutMapping(value = "/events/{id}")
 			public ResponseEntity<EventDTO> update(@PathVariable Long id, @RequestBody EventDTO dto) {
 				dto = service.update(id, dto);
 				return ResponseEntity.ok().body(dto);
 				
-		
-		}
 
 	}
 

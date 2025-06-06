@@ -6,10 +6,15 @@ import java.util.Set;
 
 import com.devsuperior.bds04.entities.User;
 
+import jakarta.validation.constraints.NotBlank;
+
+
 public class UserDTO  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	
+	@NotBlank(message = "Campo requerido")
 	private String firstName;
 	private String lastName;
 	private String password;
