@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.bds04.dto.UserDTO;
 import com.devsuperior.bds04.dto.UserInsertDTO;
+import com.devsuperior.bds04.dto.UserUpdateDTO;
 import com.devsuperior.bds04.services.UserService;
 
 @RestController
@@ -26,6 +26,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
+	
 	
 	@GetMapping
 	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
@@ -42,14 +43,9 @@ public class UserController {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO dto){
-		dto = service.update(id, dto);
-		return ResponseEntity.ok().body(dto);
+	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserUpdateDTO dto){
+		UserDTO newDto = service.update(id, dto);
+		return ResponseEntity.ok().body(newDto);
 	}
 	
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<void> delete(@PathVariable Long id){
-		service.delete(id);
-		return ResponseEntity.noContent().build();
-	}
 }

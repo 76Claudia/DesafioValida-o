@@ -74,8 +74,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
-			
-	</dependencies>
+
+		<dependency>
+			<groupId>com.devsuperior</groupId>
+			<artifactId>bds02</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+</dependencies>
 
 	<build>
 		<plugins>
