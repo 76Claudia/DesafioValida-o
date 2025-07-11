@@ -1,5 +1,6 @@
 package com.devsuperior.bds04.controllers;
 
+
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,13 @@ public class UserController {
 	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
 		Page<UserDTO> list = service.findAllPaged(pageable);
 		return ResponseEntity.ok().body(list);
+		
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<UserDTO> findById(@PathVariable Long id){
+		UserDTO dto = service.findById(id);
+		return ResponseEntity.ok().body(dto);
 	}
 	
 	@PostMapping
@@ -44,8 +52,8 @@ public class UserController {
 	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserUpdateDTO dto){
-		UserDTO newDto = service.update(id, dto);
-		return ResponseEntity.ok().body(newDto);
+		dto = service.update(id, dto);
+		return ResponseEntity.ok().body(dto);
 	}
 	
 }

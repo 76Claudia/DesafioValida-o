@@ -9,7 +9,7 @@ import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 
-@Constraint(validatedBy = UserInsertValidator.class)
+@Constraint(validatedBy = UserUpdateValidator.class)
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 
