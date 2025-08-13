@@ -1,12 +1,13 @@
 package com.devsuperior.bds04.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -17,10 +18,11 @@ public class City {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String name;
 	
-	@OneToMany(mappedBy = "city")
-	private List<Event> events = new ArrayList<>();
+	@OneToMany(mappedBy ="city")
+	private Set<Event> events = new HashSet<>();
 	
 	public City() {
 	}
@@ -46,7 +48,14 @@ public class City {
 		this.name = name;
 	}
 
-	public List<Event> getEvents() {
+	public Set<Event> getEvents() {
 		return events;
 	}
+
+	@Override
+	public String toString() {
+		return "City [id=" + id + "]";
+	}
+
+	
 }

@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\temp\DesafioValidacao\src\main\java\com\devsuperior\bds04"/>
 			<item value="C:\temp\DesafioValidacao"/>
 		</list>
 		<list key="projectNameTemplate">

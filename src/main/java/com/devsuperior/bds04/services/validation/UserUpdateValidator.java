@@ -20,6 +20,7 @@ public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid,
 	
 	@Autowired
 	private HttpServletRequest request;
+	
 	@Autowired
 	private UserRepository repository;
 	
@@ -34,12 +35,13 @@ public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid,
 		
 		@SuppressWarnings("unchecked")
 		var uriVars = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-		@SuppressWarnings("unused")
 		long userId = Long.parseLong(uriVars.get("id"));
+		
 		List<FieldMessage> list = new ArrayList<>();
 		
-		User user = repository.f
-		if(user != null) {", "Campo requeirdo"));
+		User user = repository.findByEmail(dto.getEmail());
+		if(user != null && userId != user.getId()) {
+			list.add(new FieldMessage("email", "Email já existe"));
 		}
 
 		for (FieldMessage e : list) {
