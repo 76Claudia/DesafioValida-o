@@ -7,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -21,7 +20,7 @@ public class City {
 
 	private String name;
 	
-	@OneToMany(mappedBy ="city")
+	@OneToMany(mappedBy = "city")
 	private Set<Event> events = new HashSet<>();
 	
 	public City() {
@@ -52,10 +51,6 @@ public class City {
 		return events;
 	}
 
-	@Override
-	public String toString() {
-		return "City [id=" + id + "]";
-	}
-
+	
 	
 }

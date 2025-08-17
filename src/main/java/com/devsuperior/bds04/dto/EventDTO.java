@@ -81,4 +81,8 @@ public class EventDTO implements Serializable {
 	public void setCityId(Long cityId) {
 		this.cityId = cityId;
 	}
+
 }
+	
+
+

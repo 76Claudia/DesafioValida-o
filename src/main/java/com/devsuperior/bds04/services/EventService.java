@@ -14,10 +14,7 @@ import com.devsuperior.bds04.dto.EventDTO;
 import com.devsuperior.bds04.entities.Event;
 import com.devsuperior.bds04.exceptions.DatabaseException;
 import com.devsuperior.bds04.exceptions.ResourceNotFoundException;
-import com.devsuperior.bds04.repositories.CityRepository;
 import com.devsuperior.bds04.repositories.EventRepository;
-
-import jakarta.validation.Valid;
 
 @Service
 public class EventService {

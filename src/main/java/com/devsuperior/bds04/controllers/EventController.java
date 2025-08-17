@@ -17,15 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.bds04.dto.EventDTO;
-import com.devsuperior.bds04.entities.City;
-import com.devsuperior.bds04.entities.Event;
-import com.devsuperior.bds04.exceptions.ResourceNotFoundException;
-import com.devsuperior.bds04.repositories.CityRepository;
-import com.devsuperior.bds04.repositories.EventRepository;
 import com.devsuperior.bds04.services.EventService;
 
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 
@@ -41,6 +34,7 @@ public class EventController {
 			@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
 			@GetMapping
 			public ResponseEntity<Page<EventDTO>> findAll(Pageable pageable) {
+				@SuppressWarnings("unused")
 				PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(), Sort.by("name"));
 				Page<EventDTO> list = service.findAllPaged(pageable);		
 				return ResponseEntity.ok().body(list);
