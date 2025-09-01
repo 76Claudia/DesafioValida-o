@@ -28,7 +28,7 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
+
 	@GetMapping
 	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
 		Page<UserDTO> list = service.findAllPaged(pageable);

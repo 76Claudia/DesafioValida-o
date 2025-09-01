@@ -1,5 +1,4 @@
-package com.devsuperior.bds04.config
-;
+package com.devsuperior.bds04.config;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -17,7 +16,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.OAuth2Token;
@@ -56,10 +54,10 @@ import com.nimbusds.jose.proc.SecurityContext;
 @Configuration
 public class AuthorizationServerConfig {
 
-	@Value("${security.client-id}")
+	@Value("${security.oauth2.client.client-id}")
 	private String clientId;
 
-	@Value("${security.client-secret}")
+	@Value("${security.oauth2.client.client-secret}")
 	private String clientSecret;
 
 	@Value("${security.jwt.duration}")
@@ -71,12 +69,11 @@ public class AuthorizationServerConfig {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
-    @SuppressWarnings("removal")
     @Bean
     @Order(2)
     SecurityFilterChain asSecurityFilterChain(HttpSecurity http) throws Exception {
 
-		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+    	http.securityMatcher("oauth2/**", "/.well-known/**").with(OAuth2AuthorizationServerConfigurer.authorizationServer(), Customizer.withDefaults());
 
 		// @formatter:off
 		http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)

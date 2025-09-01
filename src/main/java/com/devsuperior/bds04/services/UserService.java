@@ -17,6 +17,7 @@ import com.devsuperior.bds04.dto.UserInsertDTO;
 import com.devsuperior.bds04.entities.Role;
 import com.devsuperior.bds04.entities.User;
 import com.devsuperior.bds04.projections.UserDetailsProjection;
+import com.devsuperior.bds04.repositories.RoleRepository;
 import com.devsuperior.bds04.repositories.UserRepository;
 
 import jakarta.validation.Valid;
@@ -32,23 +33,11 @@ public class UserService implements UserDetailsService{
 	@Autowired
 	private UserRepository repository;
 	
+	@Autowired
+	private RoleRepository roleRepository;
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
-		if(result.size() == 0) {
-			throw new UsernameNotFoundException("User not found");
-		}
-		
-		User user = new User();
-		user.setEmail(username);
-		user.setPassword(result.get(0).getPassword());
-		for(UserDetailsProjection projection : result) {
-			user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
-		}
-		return user;
-	}
+
+	
 
 	@Transactional(readOnly = true)
 	public Page<UserDTO> findAllPaged(Pageable pageable) {
@@ -72,5 +61,25 @@ public class UserService implements UserDetailsService{
 			entity.setPassword(dto.getPassword());
 			
 	}
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
+		if(result.size() == 0) {
+			throw new UsernameNotFoundException("User not found");
+		}
+		
+		User user = new User();
+		user.setEmail(username);
+		user.setPassword(result.get(0).getPassword());
+		for(UserDetailsProjection projection : result) {
+			user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
+		}
+		return user;
+	}
+
+
 }
+
+	
 	

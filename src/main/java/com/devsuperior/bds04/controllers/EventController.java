@@ -31,16 +31,15 @@ public class EventController {
 			private EventService service;
 			
 			
-			@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
+			
 			@GetMapping
 			public ResponseEntity<Page<EventDTO>> findAll(Pageable pageable) {
-				@SuppressWarnings("unused")
-				PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(), Sort.by("name"));
+				
 				Page<EventDTO> list = service.findAllPaged(pageable);		
 				return ResponseEntity.ok().body(list);
 				
 			}		
-			@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+			@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
 			@PostMapping
 			public ResponseEntity<EventDTO> insert(@Valid @RequestBody EventDTO dto) {
 			   dto = service.insert(dto);
